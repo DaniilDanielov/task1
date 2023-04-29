@@ -13,8 +13,9 @@ class m230429_130537_create_table_check_menu_items extends Migration
 create table public.check_menu_items
 (
     id              bigserial primary key,
-    menuItemId      bigint not null,
-    checkId         bigint not null
+    menu_item_id    bigint not null,
+    menu_item_count int,
+    check_id        bigint not null
 );
 SQL;
 

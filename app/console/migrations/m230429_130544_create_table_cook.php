@@ -13,9 +13,14 @@ class m230429_130544_create_table_cook extends Migration
 create table public.cook
 (
     id          bigserial not null primary key,
-    title       text,
+    name        text not null ,
     description text
 );
+---
+insert into public.cook (id,name)
+  VALUES 
+(1,'Петров Петр Петрович'),
+(2,'Иванов Иван Иванович');
 SQL;
 
         foreach (explode('---', $sql) as $item) {

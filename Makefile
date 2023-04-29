@@ -20,6 +20,7 @@ docker-init: cdu
 	docker-compose down
 	docker-compose up -d
 	docker-compose exec app composer i -o --no-interaction --ignore-platform-reqs
+	docker-compose exec app php yii migrate/up
 
 docker-prune:
 	docker-compose rm -fsv

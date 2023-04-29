@@ -1,14 +1,15 @@
 <?php
-namespace Common\Models;
 
+namespace backend\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
  * @property int          $id
- * @property int          $menuItemId
- * @property int          $checkId
+ * @property int          $menu_item_id
+ * @property int          $menu_item_count
+ * @property int          $check_id
  *
  * @property-read MenuItem  $menuItem
  * @property-read Check     $check
@@ -16,20 +17,22 @@ use yii\db\ActiveRecord;
 class CheckMenuItems extends ActiveRecord
 {
     public const
-        ATTR_ID             = 'id',
-        ATTR_MENU_ITEM_ID   = 'menuItemId',
-        ATTR_CHECK_ID       = 'checkId';
+        ATTR_ID                 = 'id',
+        ATTR_MENU_ITEM_ID       = 'menu_item_id',
+        ATTR_MENU_ITEM_COUNT    = 'menu_item_count',
+        ATTR_CHECK_ID           = 'check_id';
     public static function tableName(): string
     {
-        return 'public.check_dishes';
+        return 'public.check_menu_items';
     }
 
     public function rules(): array
     {
         return [
-            [self::ATTR_ID,         'int'],
-            [self::ATTR_MENU_ITEM_ID,    'int'],
-            [self::ATTR_CHECK_ID,   'int'],
+            [self::ATTR_ID,             'integer'],
+            [self::ATTR_MENU_ITEM_ID,   'integer'],
+            [self::ATTR_MENU_ITEM_COUNT,'integer'],
+            [self::ATTR_CHECK_ID,       'integer'],
         ];
     }
 

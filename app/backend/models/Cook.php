@@ -1,5 +1,6 @@
 <?php
-namespace Common\Models;
+
+namespace backend\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -26,7 +27,7 @@ class Cook extends ActiveRecord
     public function rules(): array
     {
         return [
-            [self::ATTR_ID,         'int'],
+            [self::ATTR_ID,         'integer'],
             [self::ATTR_NAME,       'string'],
         ];
     }

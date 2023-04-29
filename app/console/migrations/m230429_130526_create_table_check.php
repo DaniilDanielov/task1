@@ -13,10 +13,9 @@ class m230429_130526_create_table_check extends Migration
 create table public.check
 (
     id              bigserial primary key,
-    dishId          bigint,
-    dishCount       int,
-    totalPrice      decimal,
-    createdAt       timestamp
+    menu_item_id    bigint,
+    total_price     decimal not null default 0,
+    created_at      timestamp not null default now()
 );
 SQL;
 

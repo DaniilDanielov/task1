@@ -15,16 +15,22 @@ class m230429_130551_create_table_dish extends Migration
 create table public.dish
 (
     id              bigint not null primary key,
-    title           text,
+    title           text not null ,
     description     text,
-    price           float,
-    cookId          bigint,
-    createdAt       text,
-    foreign key (cookId)
+    cook_id         bigint not null,
+    created_at      timestamp not null default now(),
+    foreign key (cook_id)
         references public.cook(id)
     on update cascade on delete restrict
 );
-
+---
+insert into public.dish (id,title,cook_id)
+  VALUES 
+(1,'Салат Цезарь',1),
+(2,'Салат Крабовый',1),
+(3,'Шашлык',2),
+(4,'Люля Кебаб',2),
+(5,'Пицца',2);
 SQL;
 
         foreach (explode('---', $sql) as $item) {

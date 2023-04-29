@@ -1,15 +1,15 @@
 <?php
-namespace Common\Models;
+
+namespace backend\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
  * @property int                $id
- * @property int                $dishId
- * @property int                $dishCount
- * @property float              $totalPrice
- * @property string             $createdAt
+ * @property int                $menu_item_id
+ * @property float              $total_price
+ * @property string             $created_at
  *
  * @property-read Dish[]            $dishes
  * @property-read CheckMenuItems    $checkMenuItems
@@ -19,10 +19,9 @@ class Check extends ActiveRecord
 {
     public const
         ATTR_ID             = 'id',
-        ATTR_DISH_ID        = 'dishId',
-        ATTR_DISH_COUNT     = 'dishCount',
-        ATTR_TOTAL_PRICE    = 'totalPrice',
-        ATTR_CREATED_AT     = 'createdAt';
+        ATTR_DISH_ID        = 'menu_item_id',
+        ATTR_TOTAL_PRICE    = 'total_price',
+        ATTR_CREATED_AT     = 'created_at';
 
     public const RELATION_CHECK_MENU_ITEMS = 'checkMenuItems';
 
@@ -34,10 +33,9 @@ class Check extends ActiveRecord
     public function rules(): array
     {
         return [
-            [self::ATTR_ID,             'int'],
-            [self::ATTR_DISH_ID,        'int'],
-            [self::ATTR_DISH_COUNT,     'int'],
-            [self::ATTR_TOTAL_PRICE,    'float'],
+            [self::ATTR_ID,             'integer'],
+            [self::ATTR_DISH_ID,        'integer'],
+            [self::ATTR_TOTAL_PRICE,    'double'],
             [self::ATTR_CREATED_AT,     'string'],
         ];
     }

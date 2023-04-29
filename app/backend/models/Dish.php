@@ -1,5 +1,6 @@
 <?php
-namespace Common\Models;
+
+namespace backend\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -8,11 +9,11 @@ use yii\db\ActiveRecord;
  * @property int                    $id
  * @property string                 $title
  * @property string                 $description
- * @property int                    $cookId
- * @property string                 $createdAt
+ * @property int                    $cook_id
+ * @property string                 $created_at
  *
  * @property-read Cook              $cook
- * @property-read MenuItem         $menuItem
+ * @property-read MenuItem          $menuItem
  * @property-read Check[]           $checks
  */
 class Dish extends ActiveRecord
@@ -21,8 +22,8 @@ class Dish extends ActiveRecord
         ATTR_ID             = 'id',
         ATTR_TITLE          = 'title',
         ATTR_DESCRIPTION    = 'description',
-        ATTR_COOK_ID        = 'cookId',
-        ATTR_CREATED_AT     = 'createdAt';
+        ATTR_COOK_ID        = 'cook_id',
+        ATTR_CREATED_AT     = 'created_at';
 
     public const RELATION_DISHES = 'dishes';
     public static function tableName(): string
@@ -33,10 +34,10 @@ class Dish extends ActiveRecord
     public function rules(): array
     {
         return [
-            [self::ATTR_ID,             'int'],
+            [self::ATTR_ID,             'integer'],
             [self::ATTR_TITLE,          'string'],
             [self::ATTR_DESCRIPTION,    'string'],
-            [self::ATTR_COOK_ID,        'int'],
+            [self::ATTR_COOK_ID,        'integer'],
             [self::ATTR_CREATED_AT,     'string'],
 
         ];

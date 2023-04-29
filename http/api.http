@@ -1,0 +1,16 @@
+POST http://localhost:8084/api/open-check?dishId=2
+Accept: application/json
+
+###
+POST http://localhost:8084/api/add-dish-to-check
+Content-Type: application/json
+
+{
+  "checkId": "1",
+  "menuItemId": "3",
+  "menuItemCount": "3"
+}
+
+###
+GET http://localhost:8084/api/get-popular-cook
+Accept: application/json

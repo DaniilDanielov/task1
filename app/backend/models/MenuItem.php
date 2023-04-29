@@ -1,5 +1,6 @@
 <?php
-namespace Common\Models;
+
+namespace backend\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -9,9 +10,9 @@ use yii\db\ActiveRecord;
  * @property string             $title
  * @property string             $description
  * @property float              $price
- * @property int                $dishId
- * @property string             $createdAt
- * @property string             $updatedAt
+ * @property int                $dish_id
+ * @property string             $created_at
+ * @property string             $updated_at
  *
  * @property-read Dish          $dish
  */
@@ -21,9 +22,10 @@ class MenuItem extends ActiveRecord
         ATTR_ID             = 'id',
         ATTR_NAME           = 'title',
         ATTR_DESCRIPTION    = 'description',
-        ATTR_DISH_ID        = 'dishId',
+        ATTR_DISH_ID        = 'dish_id',
         ATTR_PRICE          = 'price',
-        ATTR_CREATED_AT     = 'createdAt';
+        ATTR_CREATED_AT     = 'created_at',
+        ATTR_UPDATED_AT     = 'updated_at';
     public static function tableName(): string
     {
         return 'menu_item';
@@ -33,11 +35,12 @@ class MenuItem extends ActiveRecord
     {
         return [
             [self::ATTR_ID,             'string'],
-            [self::ATTR_NAME,           'required'],
-            [self::ATTR_DESCRIPTION,    'required'],
-            [self::ATTR_DISH_ID,        'required'],
-            [self::ATTR_PRICE,          'required'],
-            [self::ATTR_CREATED_AT,     'required'],
+            [self::ATTR_NAME,           'string'],
+            [self::ATTR_DESCRIPTION,    'string'],
+            [self::ATTR_DISH_ID,        'integer'],
+            [self::ATTR_PRICE,          'double'],
+            [self::ATTR_CREATED_AT,     'string'],
+            [self::ATTR_UPDATED_AT,     'string'],
         ];
     }
 

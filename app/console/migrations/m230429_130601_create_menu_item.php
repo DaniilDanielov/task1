@@ -14,12 +14,13 @@ class m230429_130601_create_menu_item extends Migration
 create table public.menu_item
 (
     id              bigserial primary key,
-    title           text,
+    title           text not null,
     description     text,
-    dishId          bigint,
-    price           decimal,
-    createdAt       timestamp,
-    foreign key (dishId)
+    dish_id         bigint not null,
+    price           decimal not null,
+    created_at      timestamp not null,
+    updated_at      timestamp not null,
+    foreign key (dish_id)
         references public.dish(id)
     on update cascade on delete cascade 
 );

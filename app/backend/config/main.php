@@ -1,4 +1,14 @@
 <?php
+
+use common\models\User;
+use common\repository\CheckRepository;
+use common\repository\CheckRepositoryInterface;
+use common\repository\CookRepository;
+use common\repository\CookRepositoryInterface;
+use yii\web\JsonParser;
+use yii\web\Request;
+use yii\web\Response;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -12,39 +22,34 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
-    'components' => [
-        'request' => [
-            'csrfParam' => '_csrf-backend',
+    'container' => [
+        'singletons'  => [
+            CheckRepositoryInterface::class => CheckRepository::class,
+            CookRepositoryInterface::class => CookRepository::class,
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+    ],
+    'components' =>     [
+        'request'    => [
+            'class'                => Request::class,
+            'parsers'              => ['application/json' => JsonParser::class],
+            'enableCsrfCookie'     => false,
+            'enableCsrfValidation' => false,
         ],
-        'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+        'response'   => [
+            'class'  => Response::class,
+            'format' => 'json',
         ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => \yii\log\FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
+        'user'       => [
+            'identityClass'   => User::class,
+            'enableAutoLogin' => false,
+            'enableSession'   => false,
+            'autoRenewCookie' => false,
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+            'enablePrettyUrl'     => true,
+            'enableStrictParsing' => false,
+            'showScriptName'      => false,
         ],
-        */
     ],
     'params' => $params,
 ];
