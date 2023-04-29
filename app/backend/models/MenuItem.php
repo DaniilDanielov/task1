@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 
 /**
  * @property int                $id
- * @property int                $name
+ * @property string             $title
  * @property string             $description
  * @property float              $price
  * @property int                $dishId
@@ -19,14 +19,14 @@ class MenuItem extends ActiveRecord
 {
     public const
         ATTR_ID             = 'id',
-        ATTR_NAME           = 'name',
+        ATTR_NAME           = 'title',
         ATTR_DESCRIPTION    = 'description',
         ATTR_DISH_ID        = 'dishId',
         ATTR_PRICE          = 'price',
         ATTR_CREATED_AT     = 'createdAt';
     public static function tableName(): string
     {
-        return 'menu';
+        return 'menu_item';
     }
 
     public function rules(): array
