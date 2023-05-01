@@ -1,4 +1,4 @@
-build: docker-build docker-init
+build: docker-build docker-init init-yii
 rebuild: docker-down docker-prune docker-build docker-init
 init: cdu docker-init
 du: cdu docker-up
@@ -19,6 +19,9 @@ docker-build: cdu
 docker-init: cdu
 	docker-compose down
 	docker-compose up -d
+
+init-yii: cdu
+	docker-compose exec app php ./init
 	docker-compose exec app composer i -o --no-interaction --ignore-platform-reqs
 	docker-compose exec app php yii migrate/up
 
