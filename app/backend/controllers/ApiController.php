@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\configModels\AddItemConfig;
+use backend\models\configModels\PopularCookConfig;
 use common\repository\CheckRepositoryInterface;
 use common\repository\CookRepositoryInterface;
 use yii\filters\ContentNegotiator;
@@ -48,7 +49,7 @@ class ApiController extends Controller
     public function actionAddDishToCheck(): array
     {
         $config = new AddItemConfig();
-        $config->load($this->getParams());
+        $config->load($this->getParams(),'');
         $createdCheck = $this->checkRepository->addMenuItemToCheck($config);
 
         return ['checkId' => $createdCheck->id];
@@ -57,9 +58,10 @@ class ApiController extends Controller
     //Тут ответ заглушка- т.к. не успел проверить, что вернется
     public function actionGetPopularCook(): array
     {
-        $createdCheck = $this->cookRepository->getPopularCook();
+        $config = new PopularCookConfig();
+        $config->load($this->getParams(),'');
 
-        return ['checkId' => $createdCheck->id];
+        return $this->cookRepository->getPopularCook($config);
     }
 
     public function getParams(): array

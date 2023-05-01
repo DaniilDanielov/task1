@@ -15,7 +15,7 @@ create table public.check
     id              bigserial primary key,
     menu_item_id    bigint,
     total_price     decimal not null default 0,
-    created_at      timestamp not null default now()
+    created_at      timestamptz not null default now()
 );
 SQL;
 

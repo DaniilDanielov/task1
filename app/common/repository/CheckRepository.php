@@ -21,6 +21,7 @@ class CheckRepository implements CheckRepositoryInterface
     {
         $checkMenuItem = new CheckMenuItems();
 
+        $checkMenuItem->check_id = $config->checkId;
         $checkMenuItem->menu_item_id = $config->menuItemId;
         $checkMenuItem->menu_item_count = $config->menuItemCount;
         $checkMenuItem->save();

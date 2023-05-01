@@ -18,12 +18,13 @@ create table public.dish
     title           text not null ,
     description     text,
     cook_id         bigint not null,
-    created_at      timestamp not null default now(),
+    created_at      timestamptz not null default now(),
     foreign key (cook_id)
         references public.cook(id)
     on update cascade on delete restrict
 );
 ---
+--Данная сущность для внутреннего пользования, подразумевается, что тут указываем ингредиенты, рецепты итп
 insert into public.dish (id,title,cook_id)
   VALUES 
 (1,'Салат Цезарь',1),
