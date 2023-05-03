@@ -12,8 +12,6 @@ services:
     networks:
       - main
     tty: true
-    links:
-      - app
 
   app:
     container_name: app
@@ -28,6 +26,9 @@ services:
     volumes:
       - ./app:/var/www/app
       - ./docker/php/settings/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    depends_on:
+      - nginx
+      - pgsql
     networks:
       - main
     env_file:
@@ -46,6 +47,12 @@ services:
       - 5432
     ports:
       - "5432:5432"
+    volumes:
+      - data-pgsql:/var/lib/postgresql/data
+
+volumes:
+  data-pgsql:
+    external: true
 
 networks:
   main:

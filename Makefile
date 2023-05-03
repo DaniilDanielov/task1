@@ -16,9 +16,12 @@ docker-up: cdu
 docker-build: cdu
 	docker-compose build
 
-docker-init: cdu
+docker-init: cdu docker-volume
 	docker-compose down
 	docker-compose up -d
+
+docker-volume:
+	docker volume create --name data-pgsql || true
 
 init-yii: cdu
 	docker-compose exec app php ./init
