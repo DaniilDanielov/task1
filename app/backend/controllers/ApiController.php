@@ -55,7 +55,6 @@ class ApiController extends Controller
         return ['checkId' => $createdCheck->id];
     }
 
-    //Тут ответ заглушка- т.к. не успел проверить, что вернется
     public function actionGetPopularCook(): array
     {
         $config = new PopularCookConfig();
