@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\configModels\AddItemConfig;
 use backend\models\configModels\PopularCookConfig;
+use common\exceptions\InvalidModelException;
 use common\repository\CheckRepositoryInterface;
 use common\repository\CookRepositoryInterface;
 use yii\filters\ContentNegotiator;
@@ -46,19 +47,38 @@ class ApiController extends Controller
         return ['checkId' => $createdCheck->id];
     }
 
+    /**
+     * @return array
+     *
+     * @throws InvalidModelException
+     */
     public function actionAddDishToCheck(): array
     {
         $config = new AddItemConfig();
         $config->load($this->getParams(),'');
+
+        if (!$config->validate()) {
+            throw new InvalidModelException($config);
+        }
+
         $createdCheck = $this->checkRepository->addMenuItemToCheck($config);
 
         return ['checkId' => $createdCheck->id];
     }
 
+    /**
+     * @return array
+     *
+     * @throws InvalidModelException
+     */
     public function actionGetPopularCook(): array
     {
         $config = new PopularCookConfig();
         $config->load($this->getParams(),'');
+
+        if (!$config->validate()) {
+            throw new InvalidModelException($config);
+        }
 
         return $this->cookRepository->getPopularCook($config);
     }

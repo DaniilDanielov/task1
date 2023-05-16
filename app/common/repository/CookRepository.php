@@ -2,12 +2,12 @@
 
 namespace common\repository;
 
-
 use backend\models\Check;
 use backend\models\CheckMenuItems;
 use backend\models\configModels\AddItemConfig;
 use backend\models\configModels\PopularCookConfig;
 use backend\models\Cook;
+use common\exceptions\DataBaseError;
 use Yii;
 use yii\data\SqlDataProvider;
 use yii\db\Exception;
@@ -17,7 +17,10 @@ class CookRepository implements CookRepositoryInterface
 
 
     /**
-     * @throws Exception
+     * @param PopularCookConfig $config
+     * @return array
+     *
+     * @throws DataBaseError
      */
     public function getPopularCook(PopularCookConfig $config): array
     {
@@ -49,6 +52,12 @@ SQL;
             ':limit' => $config->limit,
         ]);
 
-        return $cmd->queryAll();
+        try {
+            $result = $cmd->queryAll();
+        } catch (\Throwable $e) {
+            throw new DataBaseError(sprintf('При обработке запроса в базу данных возникла ошибка:%s',$e->getMessage()));
+        }
+
+        return $result;
     }
 }

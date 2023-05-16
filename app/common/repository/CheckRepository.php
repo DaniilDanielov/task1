@@ -2,10 +2,10 @@
 
 namespace common\repository;
 
-
 use backend\models\Check;
 use backend\models\CheckMenuItems;
 use backend\models\configModels\AddItemConfig;
+use common\exceptions\DataBaseError;
 
 class CheckRepository implements CheckRepositoryInterface
 {
@@ -24,7 +24,10 @@ class CheckRepository implements CheckRepositoryInterface
         $checkMenuItem->check_id = $config->checkId;
         $checkMenuItem->menu_item_id = $config->menuItemId;
         $checkMenuItem->menu_item_count = $config->menuItemCount;
-        $checkMenuItem->save();
+
+        if (!$checkMenuItem->save()) {
+            throw new DataBaseError(sprintf('Возникла ошибка во время сохранении модели: %s',CheckMenuItems::class));
+        }
 
         return $checkMenuItem;
     }
